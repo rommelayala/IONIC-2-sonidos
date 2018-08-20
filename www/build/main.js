@@ -41,6 +41,7 @@ webpackEmptyAsyncContext.id = 149;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_data_animales__ = __webpack_require__(268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(108);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -52,10 +53,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var HomePage = /** @class */ (function () {
     function HomePage() {
         this.animales = [];
         this.audio = new Audio();
+        this.ordenando = false;
         this.animales = __WEBPACK_IMPORTED_MODULE_1__data_data_animales__["a" /* ANIMALES */].slice(0);
     }
     HomePage.prototype.reproducir = function (animal) {
@@ -96,9 +99,13 @@ var HomePage = /** @class */ (function () {
             refresher.complete();
         }, 1500);
     };
+    HomePage.prototype.reordenar_animales = function (idx) {
+        console.log(idx);
+        this.animales = Object(__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* reorderArray */])(this.animales, idx);
+    };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/Melo/ionic/2-sonidos/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Sonidos\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-refresher (ionRefresh)="recargar_animales($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Sigue jalando" refreshingSpinner="circles" refreshingText="Recargando...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <ion-list reorder="true">\n    <ion-item-sliding *ngFor="let animal of animales; let i =index">\n      <ion-item (click)="reproducir(animal)">\n        <ion-avatar item-start>\n          <img [src]="animal.imagen">\n        </ion-avatar>\n        <h2>{{animal.nombre}}</h2>\n        <ion-icon *ngIf="!animal.reproduciendo" item-end name="play"></ion-icon>\n        <ion-icon *ngIf="animal.reproduciendo" item-end name="pause"></ion-icon>\n        <p>este es un texto de descripcion</p>\n\n      </ion-item>\n      <ion-item-options side="right">\n        <button ion-button color="danger" (click)="borrar_animal(i)">\n          <ion-icon name="trash"></ion-icon>\n            Borrar\n        </button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/Melo/ionic/2-sonidos/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/Melo/ionic/2-sonidos/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Sonidos\n    </ion-title>\n    <ion-buttons end>\n      <button ion-button *ngIf="!ordenando" (click)="ordenando = true">\n              ordenando\n            </button>\n      <button ion-button *ngIf="ordenando" (click)="ordenando = false">\n                    Listo\n                  </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-refresher [enabled]="!ordenando" (ionRefresh)="recargar_animales($event)">\n    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Sigue jalando" refreshingSpinner="circles" refreshingText="Recargando...">\n    </ion-refresher-content>\n  </ion-refresher>\n  <ion-list [reorder]="ordenando" (ionItemReorder)="reordenar_animales($event)">\n    <ion-item-sliding *ngFor="let animal of animales; let i =index">\n      <ion-item (click)="reproducir(animal)">\n        <ion-avatar item-start>\n          <img [src]="animal.imagen">\n        </ion-avatar>\n        <h2>{{animal.nombre}}</h2>\n        <ion-icon *ngIf="!animal.reproduciendo" item-end name="play"></ion-icon>\n        <ion-icon *ngIf="animal.reproduciendo" item-end name="pause"></ion-icon>\n        <p>este es un texto de descripcion</p>\n\n      </ion-item>\n      <ion-item-options side="right">\n        <button ion-button color="danger" (click)="borrar_animal(i)">\n          <ion-icon name="trash"></ion-icon>\n            Borrar\n        </button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/Melo/ionic/2-sonidos/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [])
     ], HomePage);
