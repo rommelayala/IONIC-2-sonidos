@@ -16,8 +16,7 @@
 
 <ion-content>
   <ion-refresher [enabled]="!ordenando" (ionRefresh)="recargar_animales($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Sigue jalando" refreshingSpinner="circles" refreshingText="Recargando...">
-    </ion-refresher-content>
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Sigue jalando" refreshingSpinner="circles" refreshingText="Recargando..."></ion-refresher-content>
   </ion-refresher>
   <ion-list [reorder]="ordenando" (ionItemReorder)="reordenar_animales($event)">
     <ion-item-sliding *ngFor="let animal of animales; let i =index">
@@ -40,3 +39,8 @@
     </ion-item-sliding>
   </ion-list>
 </ion-content>
+<ion-footer >
+  <ion-toolbar >
+    <p align="center">Powered by ©Rommel</p>
+  </ion-toolbar>
+</ion-footer>
