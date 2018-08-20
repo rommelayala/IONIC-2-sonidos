@@ -7,8 +7,12 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item-sliding *ngFor="let animal of animales; let i =index" >
+  <ion-refresher (ionRefresh)="recargar_animales($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Sigue jalando" refreshingSpinner="circles" refreshingText="Recargando...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list reorder="true">
+    <ion-item-sliding *ngFor="let animal of animales; let i =index">
       <ion-item (click)="reproducir(animal)">
         <ion-avatar item-start>
           <img [src]="animal.imagen">
