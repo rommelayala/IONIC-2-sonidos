@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Sonidos
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let animal of animales; let i =index" >
+      <ion-item (click)="reproducir(animal)">
+        <ion-avatar item-start>
+          <img [src]="animal.imagen">
+        </ion-avatar>
+        <h2>{{animal.nombre}}</h2>
+        <ion-icon *ngIf="!animal.reproduciendo" item-end name="play"></ion-icon>
+        <ion-icon *ngIf="animal.reproduciendo" item-end name="pause"></ion-icon>
+        <p>este es un texto de descripcion</p>
+
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="borrar_animal(i)">
+          <ion-icon name="trash"></ion-icon>
+            Borrar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
